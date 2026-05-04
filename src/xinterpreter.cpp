@@ -401,6 +401,7 @@ namespace xcpp
 
     nl::json interpreter::complete_request_impl(const std::string& code, int cursor_pos)
     {
+        std::cout << "complete_request_impl: code=" << code << ", cursor_pos=" << cursor_pos << std::endl; // Testing what is input from code completion signal
         std::vector<std::string> results;
 
         // split the input to have only the word in the back of the cursor
@@ -411,6 +412,7 @@ namespace xcpp
 
         Cpp::CodeComplete(results, code.c_str(), 1, _cursor_pos + 1);
 
+        std::cout << "complete_request_impl: results=" << results << std::endl; // Testing what is output from code completion signal
         return xeus::create_complete_reply(results /*matches*/,
             cursor_pos - to_complete.length() /*cursor_start*/,
             cursor_pos /*cursor_end*/

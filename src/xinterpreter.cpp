@@ -412,7 +412,6 @@ namespace xcpp
 
         Cpp::CodeComplete(results, code.c_str(), 1, _cursor_pos + 1);
 
-        std::cout << "complete_request_impl: results=" << results << std::endl; // Testing what is output from code completion signal
         return xeus::create_complete_reply(results /*matches*/,
             cursor_pos - to_complete.length() /*cursor_start*/,
             cursor_pos /*cursor_end*/

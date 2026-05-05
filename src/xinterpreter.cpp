@@ -401,8 +401,8 @@ namespace xcpp
 
     nl::json interpreter::complete_request_impl(const std::string& code, int cursor_pos)
     {
-        std::cout << "complete_request_impl: code=" << code << ", cursor_pos=" << cursor_pos << std::endl; // Testing what is input from code completion signal
         std::vector<std::string> results;
+        std::cout << "Debugging: Code to complete=" << code << std::endl; // Testing what is taken from the code for the completion signal
 
         // split the input to have only the word in the back of the cursor
         std::string delims = " \t\n`!@#$^&*()=+[{]}\\|;:\'\",<>?.";

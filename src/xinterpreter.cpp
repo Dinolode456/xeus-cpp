@@ -402,7 +402,7 @@ namespace xcpp
     nl::json interpreter::complete_request_impl(const std::string& code, int cursor_pos)
     {
         std::vector<std::string> results;
-        std::cout << "Debugging: Code to complete=" << code << std::endl; // Testing what is taken from the code for the completion signal
+        std::cout << "Code Completion Request Signal Caught in complete_request_impl: code=" << code << ", cursor_pos=" << cursor_pos << std::endl; // Check if the call comes from complete_request_impl
 
         // split the input to have only the word in the back of the cursor
         std::string delims = " \t\n`!@#$^&*()=+[{]}\\|;:\'\",<>?.";
@@ -422,6 +422,8 @@ namespace xcpp
     {
         std::regex re(R"((\w*(?:\:{2}|\<.*\>|\(.*\)|\[.*\])?)(\.?)*$)");
 
+        std::cout << "Inspect Request Signal Caught in inspect_request_impl: code=" << code << ", cursor_pos=" << cursor_pos << std::endl; // Check if the call comes from inspect_request_impl
+
         std::smatch inspect_request;
         std::string sub_code = code.substr(0, cursor_pos);
         if (std::regex_search(sub_code, inspect_request, re))
@@ -438,6 +440,8 @@ namespace xcpp
 
     nl::json interpreter::is_complete_request_impl(const std::string& code)
     {
+        std::cout << "Is Complete Request Signal Caught in is_complete_request_impl: code=" << code << std::endl; // Check if the call comes from is_complete_request_impl
+
         xinput_validator v;
         std::string res = to_string(v.validate(code));
         return xeus::create_is_complete_reply(res, v.get_expected_indent());
